@@ -51,10 +51,12 @@ public class PageMapperTest extends BasicTest {
         CountryMapper countryMapper = sqlSession.getMapper(CountryMapper.class);
         Example example = new Example(Country.class);
         example.createCriteria().andGreaterThan("id",100);
-        PageHelper.startPage(2,10);
+        PageHelper.startPage(2,3);
         List<Country> countries = countryMapper.selectByExample(example);
         PageInfo<Country> pageInfo = new PageInfo<Country>(countries);
         System.out.println(pageInfo.getTotal());
+        System.out.println(pageInfo.getList().size());
+        System.out.println(pageInfo.getList().get(0).getCountryname());
 
         countries = countryMapper.selectByExample(example);
         pageInfo = new PageInfo<Country>(countries);
